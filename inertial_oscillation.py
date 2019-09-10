@@ -12,9 +12,10 @@ def main():
     f = 1e-4                # Coriolis parameter
     nt = 100               # Number of time steps
     dt = 5000              # Time step in seconds
+    
     # Initial conditions (in meters or m/s)
     x0 = 0.
-    y0 = 1e5
+    y0 = 0
     u0 = 10.
     v0 = 0.
     # Initialise velocity from initial conditions
@@ -45,41 +46,56 @@ def main():
     va = -u0*np.sin(f*times) + v0*np.cos(f*times)
     
     # Plot the solution in comparison to the analytic solution
+    plt.figure(1)
+    plt.subplot(2,1,1)
     plt.plot(xa, ya, '-k+', label='analytic')
     plt.plot(x, y, '-bo', label='forward-backward')
     plt.legend(loc='best')
     plt.xlabel('x')
     plt.ylabel('y')
     #plt.axhline(0, linestyle=':', color='black')
-    plt.show()
+    #ax1.show()
     
+    plt.subplot(2,1,2)
     plt.plot(ua, va, '-k+', label='analytic')
     plt.plot(u, v, '-bo', label='forward-backward')
     plt.legend(loc='best')
     plt.xlabel('u')
     plt.ylabel('v')
     #plt.axhline(0, linestyle=':', color='black')
-    plt.show()
 
+
+
+    plt.figure(2)
+    plt.subplot(2,2,1)
     plt.plot(xa,'-k+',label='analytical')
     plt.plot(x,'-bo',label='forward-backward')
     plt.ylabel('x')
-    plt.show()
-    
+
+    plt.subplot(2,2,2)
     plt.plot(ya,'-k+',label='analytical')
     plt.plot(y,'-bo',label='forward-backward')
-    plt.ylabel('x')
-    plt.show()
-
+    plt.ylabel('y')
+    
+    plt.subplot(2,2,3)
     plt.plot(ua,'-k+',label='analytical')
     plt.plot(u,'-bo',label='forward-backward')
-    plt.show()
+    plt.ylabel('u')
 
+    plt.subplot(2,2,4)
     plt.plot(va,'-k+',label='analytical')
     plt.plot(v,'-bo',label='forward-backward')
+    plt.ylabel('v')
+    
+   
+    plt.figure(3)
+    plt.plot(u,'-ko',label='u - fwdbk')
+    plt.plot(v,'-bo',label='v - fwdbk')
+    #plt.plot(ua,'-k+',label='u - analytic')
+    #plt.plot(va,'-b+',label='v - analytic')
     plt.show()
     
-    
+
 # Execute the code
 main()
 
