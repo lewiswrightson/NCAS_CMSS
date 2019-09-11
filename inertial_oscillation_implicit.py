@@ -10,14 +10,14 @@ import matplotlib.pyplot as plt    # Plotting library
 def main():
     # setup parameters
     f = 1e-4                # Coriolis parameter
-    nt = 100              # Number of time steps
+    nt = 1000               # Number of time steps
     dt = 500              # Time step in seconds
     
     # Initial conditions (in meters or m/s)
     x0 = 0.
     y0 = 0
     u0 = 10.
-    v0 = 2.
+    v0 = 0.
     # Initialise velocity from initial conditions
 
     #u = u0
@@ -33,11 +33,11 @@ def main():
     v[0] = v0
     # Loop over all time-steps
     for n in range(nt):
-        u[n+1] = u[n] + dt*f*v[n]
-        v[n+1] = v[n] - dt*f*u[n+1]
+        u[n+1] = (u[n] + f*v[n]*dt)/(1 + (f*dt)**2)
+        v[n+1] = (v[n] - f*u[n]*dt)/(1 + (f*dt)**2)
         x[n+1] = x[n] + dt*u[n+1]
         y[n+1] = y[n] + dt*v[n+1]
-        
+       
     # Analytic solution for the location as a function of time
     times = np.linspace(0,nt*dt, nt+1)
     xa = x0 + 1/f*(u0*np.sin(f*times) - v0*np.cos(f*times) + v0)
@@ -66,7 +66,7 @@ def main():
 
 
     # plot solutions of x, y, u and v compared to the analytical solution
-    plt.figure(2)
+    plt.figure(2,figsize=(12,8))
     plt.subplot(2,2,1)
     plt.plot(xa,'-k+',label='analytical')
     plt.plot(x,'-bo',label='forward-backward')
@@ -87,7 +87,7 @@ def main():
     plt.plot(va,'-k+',label='analytical')
     plt.plot(v,'-bo',label='forward-backward')
     plt.ylabel('v')
-    
+    plt.savefig('xyuv.png')
     plt.show()
 
 # Execute the code
