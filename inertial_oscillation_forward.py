@@ -10,7 +10,7 @@ import matplotlib.pyplot as plt    # Plotting library
 def main():
     # setup parameters
     f = 1e-4                # Coriolis parameter
-    nt = 200             # Number of time steps
+    nt = 100              # Number of time steps
     dt = 5000              # Time step in seconds
     
     # Initial conditions (in meters or m/s)
@@ -34,7 +34,7 @@ def main():
     # Loop over all time-steps
     for n in range(nt):
         u[n+1] = u[n] + dt*f*v[n]
-        v[n+1] = v[n] - dt*f*u[n+1]
+        v[n+1] = v[n] - dt*f*u[n]
         x[n+1] = x[n] + dt*u[n+1]
         y[n+1] = y[n] + dt*v[n+1]
         
@@ -49,7 +49,7 @@ def main():
     plt.figure(1)
     plt.subplot(2,1,1)
     plt.plot(xa, ya, '-k+', label='analytic')
-    plt.plot(x, y, '-bo', label='forward-backward')
+    plt.plot(x, y, '-bo', label='forward')
     plt.legend(loc='best')
     plt.xlabel('x',fontsize=15)
     plt.ylabel('y',fontsize=15)
@@ -58,7 +58,7 @@ def main():
     
     plt.subplot(2,1,2)
     plt.plot(ua, va, '-k+', label='analytic')
-    plt.plot(u, v, '-bo', label='forward-backward')
+    plt.plot(u, v, '-bo', label='forward')
     plt.legend(loc='best')
     plt.xlabel('u',fontsize=15)
     plt.ylabel('v',fontsize=15)
@@ -77,8 +77,7 @@ def main():
     plt.plot(y,'-bo',label='forward-backward')
     plt.ylabel('y',fontsize=15)
     #plt.legend(loc='best')
-  
-
+    
     plt.subplot(2,2,3)
     plt.plot(ua,'-k+',label='analytical')
     plt.plot(u,'-bo',label='forward-backward')
@@ -90,7 +89,6 @@ def main():
     plt.plot(v,'-bo',label='forward-backward')
     plt.ylabel('v',fontsize=15)
     plt.xlabel('Number of time steps',fontsize=15)
-    
     plt.show()
 
 # Execute the code

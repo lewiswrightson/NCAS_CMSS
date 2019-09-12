@@ -10,8 +10,8 @@ import matplotlib.pyplot as plt    # Plotting library
 def main():
     # setup parameters
     f = 1e-4                # Coriolis parameter
-    nt = 1000               # Number of time steps
-    dt = 500              # Time step in seconds
+    nt = 100               # Number of time steps
+    dt = 5000             # Time step in seconds
     
     # Initial conditions (in meters or m/s)
     x0 = 0.
@@ -48,20 +48,20 @@ def main():
     # Plot the solution in comparison to the analytic solution
     plt.figure(1)
     plt.subplot(2,1,1)
-    plt.plot(xa, ya, '-k+', label='analytic')
-    plt.plot(x, y, '-bo', label='forward-backward')
-    plt.legend(loc='best')
-    plt.xlabel('x')
-    plt.ylabel('y')
+    plt.plot(xa, ya, '-k+', label='analytical')
+    plt.plot(x, y, '-bo', label='implicit')
+    plt.legend(loc='best',fancybox=True)
+    plt.xlabel('x',fontsize=15)
+    plt.ylabel('y',fontsize=15)
     #plt.axhline(0, linestyle=':', color='black')
     #ax1.show()
     
     plt.subplot(2,1,2)
-    plt.plot(ua, va, '-k+', label='analytic')
-    plt.plot(u, v, '-bo', label='forward-backward')
+    plt.plot(ua, va, '-k+', label='analytical')
+    plt.plot(u, v, '-bo', label='implicit')
     plt.legend(loc='best')
-    plt.xlabel('u')
-    plt.ylabel('v')
+    plt.xlabel('u',fontsize=15)
+    plt.ylabel('v',fontsize=15)
     #plt.axhline(0, linestyle=':', color='black')
 
 
@@ -70,24 +70,24 @@ def main():
     plt.subplot(2,2,1)
     plt.plot(xa,'-k+',label='analytical')
     plt.plot(x,'-bo',label='forward-backward')
-    plt.ylabel('x')
+    plt.ylabel('x',fontsize=15)
 
     plt.subplot(2,2,2)
     plt.plot(ya,'-k+',label='analytical')
     plt.plot(y,'-bo',label='forward-backward')
-    plt.ylabel('y')
+    plt.ylabel('y',fontsize=15)
     #plt.legend(loc='best')
     
     plt.subplot(2,2,3)
     plt.plot(ua,'-k+',label='analytical')
     plt.plot(u,'-bo',label='forward-backward')
-    plt.ylabel('u')
-
+    plt.ylabel('u',fontsize=15)
+    plt.xlabel('Number of time steps',fontsize=15)
     plt.subplot(2,2,4)
     plt.plot(va,'-k+',label='analytical')
     plt.plot(v,'-bo',label='forward-backward')
-    plt.ylabel('v')
-    plt.savefig('xyuv.png')
+    plt.ylabel('v',fontsize=15)
+    plt.xlabel('Number of time steps',fontsize=15)
     plt.show()
 
 # Execute the code
